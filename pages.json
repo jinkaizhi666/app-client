@@ -1,0 +1,271 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login-register/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, 
+		{
+			"path": "pages/login-register/reset-pwd",
+			"style": {
+				"navigationBarTitleText": "重置密码"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/job/job",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/mid/release",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/msg/msg",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/home/home",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/home/buy-history",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/job-history/job-history",
+            "style" : {
+				"navigationBarTitleText":"兼职记录"
+			}
+        }
+        ,{
+            "path" : "pages/home/person-info-setting/person-info-setting",
+            "style" : {
+				"navigationBarTitleText":"个人信息设置"
+			}
+        }
+        ,{
+            "path" : "pages/home/fav/fav",
+            "style" : {
+				"navigationBarTitleText":"我的收藏"
+			}
+        }
+        ,{
+            "path" : "pages/home/my-release/my-release",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/goods-release/goods-release",
+            "style" : {
+				"navigationBarTitleText":"我发布的商品"
+			}
+        }
+        ,{
+            "path" : "pages/home/job-release/job-release",
+            "style" : {
+				"navigationBarTitleText":"我发布的工作"
+			}
+        },
+		{
+		    "path" : "pages/common/search/search",
+		   "style": {
+		   	"app-plus": {
+		   		"titleNView": false
+		   	}
+		   }
+		}
+        ,{
+            "path" : "pages/mid/release-goods/release-goods",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/index/goods-detail/goods-detail",
+            "style" : {}
+        },
+		{
+		    "path" : "pages/common/user-home/user-home",
+		    "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}
+        ,{
+            "path" : "pages/common/chat-room/chat-room",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+					// "pullToRefresh":
+				}
+			}
+        }
+        ,{
+            "path" : "pages/index/goods-search-result/goods-search-result",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/mid/release-job/release-job",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/job/job-detail/job-detail",
+            "style" : {
+				"navigationBarTitleText":"工作详情"
+			}
+        },
+		{
+		    "path" : "pages/home/job-release/bao-ming-qing-kuang/bao-ming-qing-kuang",
+		    "style" : {
+				"navigationBarTitleText":"报名情况"
+			}
+		}
+        ,{
+            "path" : "pages/job/job-search-result/job-search-result",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/home/goods-release/modify-goods-info/modify-goods-info",
+            "style" : {
+				"navigationBarTitleText":"修改物品信息"
+			}
+        }
+        ,{
+            "path" : "pages/msg/search-friend/search-friend",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/msg/search-friend/add-friend/add-friend",
+            "style" : {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/msg/friend-apply/friend-apply",
+            "style" : {
+				"navigationBarTitleText":"好友请求"
+			}
+        }
+        ,{
+            "path" : "pages/msg/friend-list/friend-list",
+            "style" : {
+				"navigationBarTitleText":"好友列表"
+			}
+        }
+    ],
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#472f71",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"midButton": {
+			"height":"70px",
+			"iconPath": "static/images/plus.png",
+			"iconWidth": "50px"
+		},
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/index.png",
+				"selectedIconPath": "static/images/index-selected.png",
+				"text": "闲置物品",
+				"color": "#999999",
+				"selectedColor": "#472f71"
+			},
+			{
+				"pagePath": "pages/job/job",
+				"iconPath": "static/images/job.png",
+				"selectedIconPath": "static/images/job-selected.png",
+				"text": "兼职",
+				"color": "#999999",
+				"selectedColor": "#472f71"
+			},
+			// #ifdef H5
+			{
+				"pagePath": "pages/mid/release",
+				"selectedIconPath": "static/images/plus.png",
+				"iconPath":"static/images/plus%20sign@2x.png",
+				"text": "发布",
+				"color": "#999999",
+				"selectedColor": "#472f71"
+			},
+			// #endif
+			{
+				"pagePath": "pages/msg/msg",
+				"iconPath": "static/images/msg.png",
+				"selectedIconPath": "static/images/msg-selected.png",
+				"text": "消息",
+				"color": "#999999",
+				"selectedColor": "#472f71"
+			},
+			{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/images/home2.png",
+				"selectedIconPath": "static/images/home-selected.png",
+				"text": "我的",
+				"color": "#999999",
+				"selectedColor": "#472f71"
+			}
+
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#f4f2f7",
+		"backgroundColor": "#f4f2f7"
+	},
+	"easycom": {
+		// 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+		// 下载安装方式
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		// npm安装方式
+		// "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	}
+}
