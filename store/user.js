@@ -1,3 +1,4 @@
+import Vue from 'vue'
 export default {
 	state: {
 		...(uni.getStorageSync('user') || {}),
@@ -7,7 +8,7 @@ export default {
 	},
 	
 	mutations: {
-		login(state, {user, token}) {
+		login(state, {user, token}, rootState) {
 			Object.assign(state, user)
 			state.token = token
 			uni.switchTab({
@@ -21,7 +22,10 @@ export default {
 				key: 'user',
 				data: user
 			})
+			uni.$emit('connectSocket')
 		},
+		
+		
 		
 		putUser(state, {key, val}) {
 			state[key] = val

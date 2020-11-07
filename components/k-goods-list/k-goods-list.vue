@@ -8,7 +8,7 @@
 				<text class="iconfont icon-jiage fs-lg "></text> {{item.price}}
 			</text>
 			<view v-if=" user" class="pt-1 flex ai-center">
-				<k-avatar :userId="item.sellerId._id" :src="item.sellerId.avatar" size="60"></k-avatar>
+				<k-avatar :userId="item.sellerId._id" :src="$get(item, 'sellerId.avatar')" size="60"></k-avatar>
 				<text class="fs-sm text-font2 pl-1 text-ellipsis" style="width: 200upx;">{{item.sellerId.userName}}</text>
 			</view>
 		</view>

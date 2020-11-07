@@ -37,7 +37,7 @@ let putUrls = {
 
 let deleteUrls = {
 	deleteFav: '/delete-fav',
-	delFriend: '/del-friend'
+	delFriend: '/del-friend',
 }
 
 // 此处第二个参数vm，就是我们在页面使用的this，你可以通过vm获取vuex等操作，更多内容详见uView对拦截器的介绍部分：

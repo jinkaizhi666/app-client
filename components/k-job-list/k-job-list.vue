@@ -18,7 +18,7 @@
 		</view>
 		
 		<view class="flex jc-between">
-			<text class="text-limit fs-sm text-info">{{item.publishBy.userName}}</text>
+			<text class="text-limit fs-sm text-info">{{$get(item, 'publishBy.userName')}}</text>
 			<text v-if="history" class="text-limit fs-sm text-info">{{$u.date(item.created, 'yyyy-mm-dd hh-MM')}}</text>
 			<text class="text-limit fs-sm text-info">{{item.adress}}</text>
 		</view>

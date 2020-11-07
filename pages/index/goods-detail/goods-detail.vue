@@ -26,13 +26,12 @@
 			<text class="">{{goodsInfo.desc}}</text>
 		</view>
 	
-		
 		<!-- 产品详情图 -->
 		
 		<image :src="item" v-for="(item, index) in goodsInfo.imgs" :key="index" mode="widthFix" style="width: 720upx;"></image>
 		
 		<!-- 底部栏 -->
-		<k-bottom @buy="buy" @fav="fav" @openChat="openChat" :isFav="isFav"></k-bottom>
+		<k-bottom  :publishId="this.goodsInfo.sellerId._id"  @buy="buy" @fav="fav" @openChat="openChat" :isFav="isFav"></k-bottom>
 		
 	</view>
 </template>
@@ -90,7 +89,9 @@
 			},
 			
 			buy() {
-				
+				uni.showModal({
+					title: '无法调用支付api, 功能未开发'
+				})
 			}
 			
 		},

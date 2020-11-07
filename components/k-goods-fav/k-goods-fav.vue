@@ -72,12 +72,18 @@
 				
 				switch (info.text) {
 					case '删除' :
-						let goodsInfo = this.favList[index]
+						let goodsInfo = this.favList[this.actionIndex]
 						this.$u.api.deleteFav({
 							favId: goodsInfo._id,
 							type: 'goods',
 						}).then( () => {
-							this.favList.splice(index, 1)
+							// this.favList.splice(index, 1)
+							// this.$destroy()
+							console.log('destroy', this.$emit)
+							this.$emit('delFav', {
+								type: 'goods',
+								index: this.actionIndex
+							})
 						})
 					break
 					

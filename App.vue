@@ -9,11 +9,11 @@
 				})
 			})
 			
-			uni.onKeyboardHeightChange( height => {
-				if(height > this.$store.state.keyBoardHeight) {
-					this.$store.commit('setKeyBoardHeight', height)
-				} 
-			})
+			// uni.onKeyboardHeightChange( height => {
+			// 	if(height > this.$store.state.keyBoardHeight) {
+			// 		this.$store.commit('setKeyBoardHeight', height)
+			// 	} 
+			// })
 			
 			// 连接socket
 			this.$store.dispatch('init')

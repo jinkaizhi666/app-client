@@ -72,8 +72,19 @@
 					authMsg: this.authMsg,
 					friendId: this.userInfo._id,
 				}).then( res => {
-					this.$u.toast('已发送申请, 请等待对方验证')
+					if(res.result === true) {
+						return this.$u.api.sendMsg({
+						     message: {
+								 type: 'system.friendApply',
+								 toId: this.userInfo._id
+							 }
+						})
+					} else {
+						return Promise.reject()
+					}
+					
 				})
+				this.$u.toast('已发送申请, 请等待对方验证')
 			}
 			
 		},

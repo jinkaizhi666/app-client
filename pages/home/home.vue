@@ -112,7 +112,9 @@
 			},
 			
 			feedback() {
-				
+				uni.showModal({
+					title: '待开发!'
+				})
 			},
 			
 			setting() {

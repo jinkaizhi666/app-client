@@ -1,5 +1,5 @@
 <template>
-	<view @click="click" :style="style" style="height: 50rpx; padding-left: 30rpx; padding-right: 30rpx;"  class="fs-sm py-0  flex ai-center jc-center round5">
+	<view @click.stop="click" :style="style" style="height: 50rpx; padding-left: 30rpx; padding-right: 30rpx;"  class="fs-sm py-0  flex ai-center jc-center round5">
 		<slot></slot>
 	</view>
 </template>

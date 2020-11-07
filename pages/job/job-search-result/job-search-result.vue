@@ -50,14 +50,19 @@
 				})
 			},
 			
-			search() {
+			search(keyword) {
+				
 				this.searchOptions.page = 1
+				this.searchOptions.keyword = keyword
+				this.searchOptions.type = this.$store.state.jobSearchType.currentType._id
 				this.getList()
 			}
 			
 		},
 		
-		onLoad() {
+		onLoad(query) {
+			this.searchOptions.keyword = query.keyword
+			this.searchOptions.type = query.type
 			this.getList()
 		}
 	}

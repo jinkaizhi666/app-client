@@ -2,9 +2,9 @@
 	<view class="">
 
 		<!-- 导航栏 -->
-		<k-nav-bar :right="true" @rightClick="show = true" @leftClick="leftClick" :bg="false">
+		<k-nav-bar :fixed="true"  @leftClick="show = true" :bg="false">
 			<image slot="left" src="/static/images/more.png" style="width: 35upx;" mode="widthFix"></image>
-			<image slot="right" src="/static/images/scholl.png" style="width: 45upx;" mode="widthFix"></image>
+			<!-- <image slot="right" src="/static/images/scholl.png" style="width: 45upx;" mode="widthFix"></image> -->
 		</k-nav-bar>
 
 		<!-- 蓝色背景 -->
@@ -18,7 +18,7 @@
 			<!-- 搜索框 -->
 			<view class="flex jc-center" style="width: 750upx;">
 				<view style="width: 600upx;">
-					<u-search height="70" @click="search" :disabled="true" input-align="center" :show-action="false" placeholder="日照香炉生紫烟"
+					<u-search height="70" @click="search" :disabled="true" input-align="center" :show-action="false" placeholder="请输入搜索内容"
 					 v-model="keyword"></u-search>
 				</view>
 
@@ -38,8 +38,12 @@
 		
 
 		<!-- 切换学校 -->
-		<u-action-sheet @click="schollSheet" :list="rightIconSheet" v-model="show"></u-action-sheet>
-
+		<!-- <u-action-sheet @click="schollSheet" :list="rightIconSheet" v-model="show"></u-action-sheet> -->
+		<u-popup v-model="show" length="60%" >
+			<view style="width: 100%; height: 100%;" class="flex jc-center p-1 ai-center">
+				<view>这是我做的一个校园平台系统用户端，by karry.jin</view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -149,7 +153,6 @@
 				
 			},
 			
-			leftClick() {}
 			
 		},
 		

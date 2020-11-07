@@ -36,7 +36,7 @@
 		</view>
 		
 		<!-- 底部栏 -->
-		<k-bottom type="job" @buy="baoming" @fav="fav" @openChat="openChat" :isFav="isFav"></k-bottom>
+		<k-bottom :publishId="this.jobInfo.publishBy._id" type="job" @buy="baoming" @fav="fav" @openChat="openChat" :isFav="isFav"></k-bottom>
 		
 	</view>
 </template>
@@ -65,7 +65,6 @@
 		
 		methods: {
 			init() {
-				
 				// 是否收藏
 				this.$u.api.isFav({
 					type: 'job',
@@ -94,6 +93,7 @@
 						type: 'job',
 					}).then( () => {
 						this.isFav = false
+						uni.$emit('updateJobFav')
 					})
 				} else { //收藏
 					this.$u.api.fav({

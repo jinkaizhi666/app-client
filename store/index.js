@@ -44,9 +44,18 @@ let store = new Vuex.Store({
 	
 	actions: {
 		init({commit, dispatch}) {
-			dispatch("connectSocket")
-			dispatch("getFriendList")
-			dispatch("initChat")
+			let token = uni.getStorageSync('token')
+			function initChat() {
+				dispatch("connectSocket")
+				dispatch("getFriendList")
+			}
+			if(token) {
+				initChat()
+			}
+			
+			uni.$on('connectSocket', () => {
+				initChat()
+			})
 		},
 	
 	},

@@ -13,6 +13,15 @@ function install (Vue) {
 	
 	
 	Vue.prototype.$user = uni.getStorageSync('user')
+	Vue.prototype.$get = function (obj, key) {
+		var value = undefined
+		try{
+			var getStr = `value = obj.${key}`
+			eval(getStr)
+		}catch(e){
+		}
+		return value
+	}
 	
 	Vue.prototype.$filePath = file => {
 		if(file.includes('http://')) return file

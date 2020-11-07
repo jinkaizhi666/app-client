@@ -16,8 +16,6 @@ export default class Chat {
 		this.isCurrentChat = true
 	}
 	
-	
-	
 	closeChat() {
 		this.isCurrentChat = false
 	}
@@ -29,6 +27,7 @@ export default class Chat {
 	formatChatListData(message, isMeSendMsg) {
 		console.log(message)
 		let data = message.data
+		let noReadNum = 0
 		switch(message.type) {
 			case 'img' :
 				data = '[图片]'
@@ -45,6 +44,25 @@ export default class Chat {
 			case 'audio' :
 				data = '[录音消息]'
 			break
+			
+			case 'system.friendApply' :
+			console.log('收到好友申请!!!')
+				return {
+					_id: 'system.friendApply',
+					// avatar: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2866953378,474015488&fm=11&gp=0.jpg',
+					userName: '+好友请求列表+',
+					data: '[点击查看好友申请列表]',
+					noReadNum: 0,
+					chatType: 'system.friendApply',
+					time: commonUtils._time(Date.now())
+				}
+			break
+			
+			case 'system.friendApply.agree' :
+				data = '你们已经成为好友，可以开始聊天了！'
+				if(isMeSendMsg) noReadNum = 1
+				$store.dispatch('getFriendList')
+			break
 		}
 		
 		return {
@@ -52,7 +70,7 @@ export default class Chat {
 			avatar: isMeSendMsg ? message.toAvatar : message.fromAvatar,
 			userName: isMeSendMsg ? message.toName : message.fromName,
 			data,
-			noReadNum: 0,
+			noReadNum,
 			chatType: message.chatType,
 			time: commonUtils._time(Date.now())
 		}
@@ -102,13 +120,13 @@ export default class Chat {
 		this.friendId = friendId
 		// console.log(chatList, 'jjj')
 		let index
-		if(isMeSendMsg) {
-			index = chatList.findIndex( chat => chat._id == message.toId )
-		}else {
-			index = chatList.findIndex( chat => chat._id == message.fromId )
-		}
-		let isInChatList = index == -1 ? false : true
 		let chatData = this.formatChatListData(message, isMeSendMsg)
+		// if(isMeSendMsg) {
+			index = chatList.findIndex( chat => chat._id == chatData._id )
+		// }else {
+			// index = chatList.findIndex( chat => chat._id == chatData._id )
+		// }
+		let isInChatList = index == -1 ? false : true
 		
 		let isCurrentChatMsg //是否是当前聊天对象发的消息
 		// $store

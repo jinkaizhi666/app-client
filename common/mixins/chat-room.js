@@ -155,7 +155,7 @@ export default {
 				  toId: this.friendInfo._id,
 				  fromName: this.$store.state.user.userName,
 				  fromId: this.$store.state.user._id,
-				  created: 1601616425757,
+				  created: Date.now(),
 				  type,
 				  options,
 				  chatType: 'user',

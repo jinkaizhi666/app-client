@@ -40,19 +40,34 @@ export default {
 			uni.$emit('setTabBarMsgNum')
 		},
 		
+		delFriend(state, index) {
+			state.friendList.splice(index, 1)
+			// Vue.set(state, 'friendList', state.friendList)
+			// state.friendList = []
+			// console.log('delFriend', index, state.friendList)
+		},
+		
 		// 初始化好友列表
 		setFriendList(state, friendList) {
 			console.log(friendList)
+			state.friendList = null
 			state.friendList = friendList
 		},
 		
 		// 进入聊天室 更新当前聊天好友信息
-		startChat(state, friendInfo) {
+		startChat(state, friendInfo, index) {
 			if(typeof friendInfo == 'string'){
 				let index = state.friendList.findIndex( friend => friend.friendId._id == friendInfo)
+				if(index == -1) {
+					uni.showToast({
+						title: '你们已经不是好友关系'
+					})
+					state.chat.delChatList(index)
+					return
+				}
 				console.log(index, state.friendList, friendInfo)
 				state.currentFriendInfo = state.friendList[index].friendId
-				console.log(index, friendInfo)
+				console.log(state.currentFriendInfo)
 				return
 			}
 			state.currentFriendInfo = friendInfo
@@ -72,7 +87,7 @@ export default {
 	},
 	
 	actions: {
-		initChat({state, commit, rootCommit}) {
+		initChat({state, dispatch, commit, rootCommit}) {
 			// let chatList = this._vm.$s.get('')
 			let chatList = state.chat.getChatList()
 			commit('updateChatList', chatList)
@@ -84,7 +99,18 @@ export default {
 			// socket.io
 			const  io = socket(`${config.socketUrl}?token=${token}`)
 			commit('initIo', io)
-			
+			io.on('connect', function(){
+				console.log('socket 连接成功!')
+			})
+			io.on('connect_error', function(){
+				console.log('socket 出错!')
+			})
+			io.on('disconnect', function(){
+				console.log('socket 断开!')
+			})
+			io.on('reconnect', function(){
+				console.log('socket 重连!')
+			})
 			let userInfo = uni.getStorageSync('user') || {}
 			
 			let chat = new Chat(userInfo, this._vm)
@@ -107,11 +133,21 @@ export default {
 				if(state.tabBarMsgNum > 0) {
 					uni.setTabBarBadge({
 							text: String(state.tabBarMsgNum),
+							// #ifdef H5
 							index: 3
+							// #endif
+							// #ifndef H5
+							index:2
+							// #endif
 						})
 				}else {
 					uni.removeTabBarBadge({
+						// #ifdef H5
 						index: 3
+						// #endif
+						// #ifndef H5
+						index:2
+						// #endif
 					})
 				}
 			

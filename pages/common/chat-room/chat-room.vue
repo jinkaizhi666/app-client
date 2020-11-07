@@ -39,7 +39,7 @@
 				<!-- 键盘 -->
 				<text v-if="moreAction.audio" @click=" action('text')" style="font-size: 50upx;" class="mx-1 iconfont icon-jianpan"></text>
 				<!-- 输入框 -->
-				<textarea v-if="moreAction.text" @focus="mode = 'text' " class="bg-bg fs-md round2 pl-1" style="padding-top: 13upx ; height: 60upx; width: 450rpx;"
+				<textarea v-if="moreAction.text" @focus="inputText" class="bg-bg fs-md round2 pl-1" style="padding-top: 13upx ; height: 60upx; width: 450rpx;"
 				 placeholder="请输入消息内容" v-model="inputVal" />
 				<!-- 语音滑块 -->
 				<view  @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd" v-if="moreAction.audio" class="flex py-1 mx-3 round4 flex1 bg-primary text-white jc-center ai-center">
@@ -176,16 +176,16 @@
 			
 		},
 		
-		watch: {
-			keyBoardHeight(newV) {
-				if(newV > 0) {
-					// console.log(newV)
-					setTimeout( () => {
-						this.goBottom()
-					}, 2000)
-				}
-			}
-		},
+		// watch: {
+		// 	keyBoardHeight(newV) {
+		// 		if(newV > 0) {
+		// 			// console.log(newV)
+		// 			setTimeout( () => {
+		// 				this.goBottom()
+		// 			}, 2000)
+		// 		}
+		// 	}
+		// },
 		
 		methods: {
 			init() {
@@ -232,6 +232,10 @@
 				
 			},
 			
+			inputText() {
+				this.$store.commit('setKeyBoardHeight', 0)
+			},
+			
 			// 更多菜单状态切换
 			action(item) {
 				switch (item) {
@@ -244,6 +248,14 @@
 					break
 					
 					case 'audio' :
+					let platform = 'h5'
+					// #ifndef H5
+						platform = 'app'
+					// #endif
+					if(platform == 'h5') {
+						this.$u.toast('h5不支持录音功能，录音请使用安卓')
+						return
+					}
 					this.moreAction.audio = true
 					this.moreAction.text = false
 					this.moreAction.emotion = false

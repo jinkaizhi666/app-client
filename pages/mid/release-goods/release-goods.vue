@@ -35,8 +35,8 @@
 			<text class="iconfont icon-biaoqian text-primary" style="padding-left: 25upx;"></text>
 			<u-form-item prop="tags">
 			<view class="flex flex-wrap pl-1 ai-center">
-				<u-tag class="m-d5" @close="removeTag(index)" :key="index" :closeable="true" mode="dark" v-for="(item, index) in form.tags"
-				 :text="item" type="primary" />
+				<u-tag class="m-d5" @close="removeTag(index)"  :closeable="true" mode="dark" v-for="(item, index) in form.tags"
+			:key="index" :text="item" type="primary" />
 			</view>
 			</u-form-item>
 		</view>
@@ -87,7 +87,7 @@
 
 				types: [],
 				
-				fileList: ['http://yefei-wechat.oss-cn-beijing.aliyuncs.com/gradation-project/1601298630248.jpg'],
+				fileList: [],
 				
 				flag: '',
 				

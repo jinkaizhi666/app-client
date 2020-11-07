@@ -4,9 +4,9 @@
 			<u-search @click="toSearch" :disabled="true" :show-action="false" bg-color="white" placeholder="请输入工作名称"></u-search>
 		</view>
 		
-		<swiper style="width: 730upx; height: 350upx;" class="round2 m-1 shadow" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item>
-				<image style="width: 730upx; height: 350upx;" src="/static/demo/Snipaste_2020-09-29_11-33-04.png" mode="scaleToFill"></image>
+		<swiper style="width: 730upx; height: 350upx; margin: 10px auto;" class="round2 shadow" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+			<swiper-item v-for="(src, index) in swiperImg" :key="index">
+				<image   style="width: 730upx; height: 350upx;" :src="src" mode="scaleToFill"></image>
 			</swiper-item>
 		</swiper>
 		
@@ -26,7 +26,10 @@
 		data() {
 			return {
 				jobList: [],
-				
+				swiperImg: [
+					'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2096239564,1303931083&fm=26&gp=0.jpg',
+					'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2077176074,647425042&fm=26&gp=0.jpg'
+				],
 				page: 1,
 				status: 'loadmore'
 			}

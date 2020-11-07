@@ -72,23 +72,24 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     },
-	"h5": {
-		"devServer" : {
-		    "https" : false,
-		    "proxy" : {
-		        "/api" : {
-		            "target" : "http://localhost:7001",
-		            "changeOrigin" : true,
-		            "ws" : true,
-		            "pathRewrite" : {
-		                "^/api" : ""
-		            }
-		        }
-		    }
-		}
-		
-	}
+    "h5" : {
+        "devServer" : {
+            "https" : false,
+            "proxy" : {
+                "/api" : {
+                    "target" : "http://localhost:7001",
+                    "changeOrigin" : true,
+                    "ws" : true,
+                    "pathRewrite" : {
+                        "^/api" : ""
+                    }
+                }
+            }
+        },
+        "title" : "校园平台",
+        "domain" : "scholl.vksure.com"
+    }
 }

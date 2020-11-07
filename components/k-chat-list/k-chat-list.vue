@@ -1,63 +1,54 @@
 <template>
 	<view class="">
-
-		
-			<!-- //action滑块 -->
-			<u-swipe-action style="mar" v-for="(item, index) in list" :index="index" :key="item._id" :show="showList[index]" @click="actionClick" @open="actionOpen(index)" :options="options">
-				
-					<view class="msg-wrap p-1 flex ai-center w-100">
-						
-			<view class="msg-left">
-				<!-- 消息气泡 -->
-				<view v-if="!!item.noReadNum" class="tip flex jc-center ai-center">{{item.noReadNum}}</view>
-				<k-avatar mode="square" :toUserHome="item.chatType == 'user' ? true : false" :src="item.chatType == 'system.friendApply' ? '/static/chat-imgs/add-friend.png' : item.avatar "></k-avatar>
-			</view>
-			<view @click="to(item)" class="msg-right flex flex-column jc-between flex1">
-				<view class="line-1 flex jc-between">
-					<view style="width: 410upx;" class="name text-limit fs-lg weight1">{{item.userName}}</view>
-					<view class="time text-icon fs-sm">
-						<text>{{item.time}}</text>
-					</view>
-				</view>
-				<view class="text-limit fs-sm line-2 pt-d5 text-icon">
-					<text>{{item.data}}</text>
-				</view>
-			</view>
-			
-			</view>
-			
-			</u-swipe-action>
-		
-
-		
-
+							<view  v-for="(item, index) in list" :key="item._id" class="msg-wrap p-1 flex ai-center w-100">
+							<!-- <view v-if="item.type == 'friendApply' " class="">
+								
+							</view>	 -->	
+							<view class="msg-left">
+								<!-- 消息气泡 -->
+								<view v-if="!!item.noReadNum" class="tip flex jc-center ai-center">{{item.noReadNum}}</view>
+								<k-avatar mode="square" :toUserHome="item.chatType == 'user' ? true : false" :src="item.chatType == 'system.friendApply' ? '/static/chat-imgs/add-friend.png' : item.avatar "></k-avatar>
+							</view>
+							<view @click="to(item, index)" class="msg-right flex flex-column jc-between flex1">
+								<view class="line-1 flex jc-between">
+									<view style="width: 410upx;" class="name text-limit fs-lg weight1">{{item.userName}}</view>
+									<view class="time text-icon fs-sm">
+										<text>{{item.time}}</text>
+									</view>
+								</view>
+								<view class="text-limit flex ai-center fs-sm line-2 pt-d5 text-icon">
+									<view style="width: 550upx;" class="text-limit">{{item.data}}</view>
+									<text style="font-size: 50upx;" @click.stop="actionShow(index)">...</text>
+								</view>
+							</view>
+							
+							</view>
+							<u-action-sheet @click="actionClick" v-model="show" :list="[{text: '删除'}]"></u-action-sheet>
+							
 	</view>
 
 </template>
 
 <script>
+	import uniSwiperAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
+	import uniSwiperItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'
 	export default {
+		components: {
+			uniSwiperAction,
+			uniSwiperItem
+		},
 		props: {
 			list: Array
 		},
 		data() {
 			return {
-				options: [
-					{
-						text: '删除',
-						style: {
-							backgroundColor: '#e06c75'
-						}
-					}
-				],
-				
-				showList: new Array(this.list.length).fill(false)
-				
+				show: false,
+				actionIndex: -1
 			};
 		},
 		
 		methods: {
-			to(item) {
+			to(item, index) {
 				switch (item.chatType) {
 					case 'system.friendApply' :
 						uni.navigateTo({
@@ -73,22 +64,19 @@
 					break
 					
 				}
-				this.$store.dispatch('resetChatListItemNoReadNum',item._id)
+				this.$store.dispatch('resetChatListItemNoReadNum',item._id, index)
 				
 			},
 			
-			actionClick(index1, index2) {
-				console.log(index1, 'action', index2)
-				let action = this.options[index2]
-				if(action.text == '删除') {
-					this.$store.state.chat.chat.delChatList(index1)
+			actionClick(index) {
+				if(index === 0) {
+					this.$store.state.chat.chat.delChatList(this.actionIndex)
 				}
-				
 			},
-			
-			actionOpen(index) {
-				this.showList = this.showList.map( () => false)
-				this.$set(this.showList, index, true)
+		
+			actionShow(index) {
+				this.actionIndex = index
+				this.show = true
 			}
 			
 		},

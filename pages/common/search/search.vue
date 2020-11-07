@@ -20,7 +20,7 @@
 			<text class="text-icon">大家都在搜</text>
 		</view>
 		<view class="flex flex-wrap my-1">
-			<u-tag bg-color="white" color="black" border-color="white" text="热水壶"></u-tag>
+			<u-tag @click="historySearch(item)" bg-color="white" color="black" border-color="white" text="热水壶"></u-tag>
 		</view>
 
 
@@ -64,7 +64,8 @@
 
 			search(keyword) {
 				// 生成搜索历史记录
-			
+				// console.log('keyword:', keyword)
+				// debugger
 				if (this.searchType == 'job') {
 					if(keyword.trim() != '') {
 						this.$s.push('jobSearchHistory', keyword, {

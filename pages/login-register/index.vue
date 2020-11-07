@@ -18,8 +18,8 @@
 
 		<!-- 登录卡片 -->
 		<view class="card shadow round">
-			<view style="height: 350upx; overflow: hidden;">
-				<scroll-view :show-scrollbar="true" scroll-y="true" style="height: 350upx;">
+			<view style="height: 500upx; overflow: hidden;">
+				<scroll-view :show-scrollbar="true" scroll-y="true" style="height: 500upx;">
 
 					<!-- 登录界面 -->
 					<u-form :model="loginForm" ref="loginForm">
@@ -67,12 +67,13 @@
 							</view>
 							<view class="flex ml-5 ai-center">
 								<image src="/static/images/code.png" style="width: 32upx; height: 32upx" mode=""></image>
-								<u-form-item>
+								<u-form-item >
 									<u-input placeholder-style="font-size: 30upx" class="ml-2" v-model="registerForm.code" placeholder="请输入验证码" />
+									<k-button-mini @click="getCode" class="mr-3">
+										获取
+									</k-button-mini>
 								</u-form-item>
-								<k-button-mini @click="getCode" class="mr-3">
-									获取
-								</k-button-mini>
+								
 							</view>
 						</u-form>
 					</view>
@@ -88,19 +89,19 @@
 			</view>
 		</view>
 		<!-- 第三方登录 -->
-		<view class="bottom">
+		<!-- <view class="bottom">
 			<view class="flex jc-around ai-center">
 				<view class="thread bg-icon">
 				</view>
 				<text class="fs-xxl">快捷登录</text>
 				<view class="thread bg-icon">
 				</view>
-			</view>
+			</view> -->
 			<!-- qq微信图标 -->
-			<view class="flex mt-1 jc-around">
+			<!-- <view class="flex mt-1 jc-around">
 				<image @click="authLogin('qq')" src="/static/images/qq.png" style="width: 100upx; height: 100upx;" mode=""></image>
 				<image @click="authLogin('wechat')" src="/static/images/wechat.png" style="width: 100upx; height: 100upx;" mode=""></image>
-			</view>
+			</view> -->
 		</view>
 
 	</view>
@@ -156,21 +157,13 @@
 							required: true,
 							message: '此项不能为空',
 							trigger: ['blur'],
-						},
-						{
-							validator: (rule, value, callback) => {
-								return value === this.form.newPwd;
-							},
-							message: '两次输入密码不一致',
-							trigger: ['blur', 'change'],
 						}
-
 					],
-					code: [{
+					code: {
 						required: true,
 						message: '请输入验证码',
 						trigger: ['blur', 'change'],
-					}]
+					}
 
 				}
 			}
@@ -188,12 +181,17 @@
 			changeType() {
 				if (this.type == 'login') {
 					this.type = 'register'
-					this.$nextTick(() => {
+					this.$nextTick( () => {
 						this.$refs.registerForm.setRules(this.rules);
 					})
-					return
+					return 
 				}
-				if (this.type == 'register') return this.type = 'login'
+				if (this.type == 'register') {
+					this.type = 'login'
+					this.$nextTick( () => { 
+						this.$refs.loginForm.setRules(this.rules);
+					})
+				}
 			},
 
 			// 跳转重置密码页面
@@ -204,10 +202,11 @@
 			},
 
 			// 登录和注册
-			async loginOrReg() {
-
+			loginOrReg() {
+				console.log(this.type)
 				if (this.type == 'login') {
 					this.$refs.loginForm.validate(valid => {
+						console.log(valid)
 						if(!valid) return
 							this.$u.api.login(this.loginForm).then(res => {
 								this.$store.commit('login', {
@@ -218,26 +217,26 @@
 					})
 
 				} else {
-					let result = await this.$refs.registerForm.validate()
-					if (!result) return
-					this.$u.api.register({
-						...this.registerForm
-
-					}).then(res => {
-					
-						uni.showToast({
-							icon: 'none',
-							title: '已为您自动登录'
-						})
-						this.$store.commit('login', {
-							user: res.user,
-							token: res.token
-						})
+				
+					this.$refs.registerForm.validate(valid => {
+						if (!valid) return
+						if(this.registerForm.pwd != this.registerForm.pwd2) return this.$u.toast('两次输入的密码不一致')
+						if(!this.registerForm.code.trim()) return this.$u.toast('请输入验证码')
+						this.$u.api.register({
+							...this.registerForm
+						
+						}).then(res => {
+						 this.loginForm = {
+							 account: this.registerForm.account,
+							 pwd: this.registerForm.pwd
+						 }
+						 this.registerForm = {}
+						 this.changeType()
+							
 					})
-
-
-				}
-
+					
+				})
+               }
 			},
 
 			authLogin(type) {
@@ -275,7 +274,7 @@
 
 	.card {
 		width: 690upx;
-		height: 600upx;
+		height: 800upx;
 		position: absolute;
 		background-color: white;
 		z-index: 10;

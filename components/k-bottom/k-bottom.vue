@@ -1,6 +1,6 @@
 <template>
 	<view style="position: fixed; bottom: 0; left: 0; width: 750upx; height: 100upx; overflow: hidden;" class="flex ai-center px-1 row-reserve bg-white">
-		<k-button-mini @click="$emit('openChat')" class="m-1">{{type == 'goods' ? '我想要' : '咨询'}}</k-button-mini>
+		<k-button-mini v-if="isShowChat" @click="$emit('openChat')" class="m-1">{{type == 'goods' ? '我想要' : '咨询'}}</k-button-mini>
 		<k-button-mini @click="$emit('buy')" type="error" class="mr-1">{{type == 'goods' ? '立即购买' : '报名'}}</k-button-mini>
 		<view class="ml-0 flex1 flex ai-center">
 			<text class="iconfont icon-shoucang fs-xxxl" :class="[ isFav ? 'text-error' : 'text-icon']"></text>
@@ -18,6 +18,13 @@
 			type: {
 				type: String,
 				default: 'goods'
+			},
+			publishId: String
+		},
+		computed: {
+			isShowChat() {
+				let userId = this.$store.state.user._id
+				return !(this.publishId == userId)
 			}
 		}
 		

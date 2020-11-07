@@ -1,5 +1,6 @@
 import config from '@/common/config.js'
-let token = uni.getStorageSync('token')
+import store from '@/store/index.js'
+let token = store.state.user.token || uni.getStorageSync('token')
 const install = (Vue) => {
 	let vm = Vue.prototype.$u
 	// 此为自定义配置参数，具体参数见上方说明
@@ -25,7 +26,7 @@ const install = (Vue) => {
 	// 请求拦截部分，如配置，每次请求前都会执行，见上方说明
 	Vue.prototype.$u.http.interceptor.request = (config) => {
 		// ......
-		if(!token) token = uni.getStorageSync('token') 
+		if(!token) token = store.state.user.token || uni.getStorageSync('token') 
 		config.header.token = token
 	
 		

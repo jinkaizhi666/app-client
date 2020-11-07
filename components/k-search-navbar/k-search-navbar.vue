@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-navbar :background="{bgColor: '#f4f2f7'}">
+		<u-navbar :background="{backgroundColor: '#ebe9ee'}">
 			<view style="width: 100%;" class="flex ai-center">
 				<view class="flex ai-center  flex1" style="height: 60upx; overflow: hidden;">
 
@@ -11,7 +11,7 @@
 					</view>
 
 					<!-- 搜索框 -->
-					<input :auto-focus="true" @confirm="search" v-model="keyword" style="border-radius: 0 100upx 100upx 0; height: 60upx;" class="bg-white flex1 p-1 fs-md"
+					<input :auto-focus="true" @confirm="search" v-model="keyword" style="border-radius: 0 100upx 100upx 0; height: 60upx;" class="bg-white flex1 px-1 fs-md"
 					 placeholder="请输入搜索内容" placeholder-class="fs-md" />
 				</view>
 

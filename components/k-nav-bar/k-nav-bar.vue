@@ -4,7 +4,7 @@
 	
 	<view  class="flex nav-bar jc-between ai-center px-1" style="z-index: 10000;  width: 750rpx; height: 80upx;">
 		<!-- 左边 -->
-		<view class="flex jc-center ai-center circle" :class="[ bg ? 'bg' : '']" style=" width: 60upx; height: 60upx;">
+		<view @click="$emit('leftClick')" class="flex jc-center ai-center circle" :class="[ bg ? 'bg' : '']" style=" width: 60upx; height: 60upx;">
 			<slot name="left">
 				<text :style="iconStyle" @click="back" class="iconfont icon-fanhui fs-xl weight3"></text>
 			</slot>
@@ -92,14 +92,14 @@
 	}
 	/* #ifdef APP-PLUS */
 	.nav-bar {
-		position: fixed;
+		position: absolute;
 		left: 0;
 		top: var(--status-bar-height);
 	}
 	/* #endif */
 	/* #ifndef APP-PLUS */
 	.nav-bar {
-		position: fixed;
+		position: absolute;
 		top: 0px;
 		left: 0;
 	}

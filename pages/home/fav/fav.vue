@@ -5,13 +5,13 @@
 		<swiper style="width: 100%;" :style="swiperHeight" @change="swiperChange" :current="swiperIndex">
 			<swiper-item>
 				
-				<k-goods-fav :favList="goodsFavList"></k-goods-fav>
+				<k-goods-fav :release="false" @delFav="delFav" :favList="goodsFavList"></k-goods-fav>
 				
 				
 			</swiper-item>
 			<swiper-item>
 				
-				<k-job-list :list="jobFavList" class="mt-1"></k-job-list>
+				<k-job-list @delFav="delFav" :list="jobFavList" class="mt-1"></k-job-list>
 				
 			</swiper-item>
 		</swiper>
@@ -48,6 +48,16 @@
 				})
 				
 				
+			},
+			
+			delFav({type, index}) {
+				
+				if(type == 'goods'){
+					this.goodsFavList.splice(index, 1)
+				}else if(type == 'job') {
+					this.jobFavList.splice(index, 1)
+				}
+				console.log(type, index, this.goodsFavList)
 			},
 			
 			getJobFav() {
@@ -88,7 +98,14 @@
 		
 		onLoad() {
 			this.init()
+			uni.$on('updateJobFav', () => {
+				this.getJobFav()
+			})
 			
+		},
+		
+		onUnload() {
+			uni.$off('updateJobFav')
 		}
 		
 	}

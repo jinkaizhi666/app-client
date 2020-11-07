@@ -11,8 +11,8 @@
 			</view>
 			
 			<view slot="right" class="top-bar-right flex ai-center">
-				<image @click="toSearch" style="margin-right: 40rpx;" src="../../static/chat-imgs/search@2x.png" mode=""></image>
-				<image src="../../static/chat-imgs/add group@2x.png" mode=""></image>
+				<image @click="toSearch" src="../../static/chat-imgs/search@2x.png" mode=""></image>
+				<!-- <image src="../../static/chat-imgs/add group@2x.png" mode=""></image> -->
 			</view>
 			
 		</k-nav-bar>
@@ -21,7 +21,7 @@
 
 		<!-- 聊天列表 -->
 		<view class="msg-list">
-
+			
 			<k-chat-list :list="chatList"></k-chat-list>
 
 		</view>
